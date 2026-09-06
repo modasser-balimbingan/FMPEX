@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- EDIT: Website title -->
+  <title>ArdNet | Farm-to-Market Price Exchange</title>
+
+  <meta name="description" content="ArdNet helps Philippine farmers access market prices, weather information, produce listings, and price alerts.">
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER / NAVIGATION
+       ========================= -->
+  <header class="site-header">
+    <div class="container nav">
+
+      <!-- EDIT: Brand -->
+      <a href="#home" class="brand" aria-label="ArdNet home">
+        <span class="brand-mark">A</span>
+        <span class="brand-copy">
+          <strong>ArdNet</strong>
+          <small>Farm-to-Market Price Exchange</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#market">Market</a>
+        <a href="#features">Features</a>
+        <a href="#roles">Users</a>
+        <a href="#listings">Produce</a>
+        <a href="#alerts">Alerts</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-small" type="button" onclick="openModal('loginModal')">
+          Sign in
+        </button>
+        <button class="btn btn-primary btn-small" type="button" onclick="openModal('registerModal', 'farmer')">
+          Get started
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         HERO
+         ========================= -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+          <p class="eyebrow">PHILIPPINES • FARMER-FIRST MARKET INFORMATION</p>
+
+          <!-- EDIT: Main headline -->
+          <h1>Sell with confidence, <span>not guesswork.</span></h1>
+
+          <p class="hero-description">
+            ArdNet helps Filipino farmers access market reference prices,
+            weather information, produce listings, and price alerts before
+            making selling decisions.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" onclick="openDashboard()">
+              Check today's prices
+            </button>
+
+            <a class="btn btn-outline" href="#features">
+              Explore ArdNet
+            </a>
+          </div>
+
+          <div class="trust-row">
+            <span><i class="trust-dot"></i> Farmer-first interface</span>
+            <span><i class="trust-dot"></i> Reference prices</span>
+            <span><i class="trust-dot"></i> Weather information</span>
+          </div>
+        </div>
+
+
+        <div class="market-visual">
+          <article class="market-card">
+
+            <div class="market-top">
+              <span class="market-label">TODAY'S MARKET SNAPSHOT</span>
+              <span class="market-time">Philippines</span>
+            </div>
+
+            <div class="market-product">
+              <!-- EDIT: Demo market product -->
+              <div class="market-product-name">Rice</div>
+              <div class="market-price">₱42.00 / kg</div>
+              <div class="market-change">↑ 6.3% this week</div>
+            </div>
+
+            <div class="chart" aria-label="Seven-day sample rice price trend">
+              <span class="bar" style="height:40%"></span>
+              <span class="bar" style="height:50%"></span>
+              <span class="bar" style="height:58%"></span>
+              <span class="bar" style="height:67%"></span>
+              <span class="bar" style="height:72%"></span>
+              <span class="bar" style="height:83%"></span>
+              <span class="bar" style="height:94%"></span>
+            </div>
+
+            <p class="chart-label">
+              Public reference price • Source and retrieval date should be shown by the connected backend.
+            </p>
+
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+         ========================= -->
+    <section class="section" id="features">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">FARMER-FIRST TOOLS</p>
+          <h2>Everything needed before the next sale.</h2>
+          <p>
+            Keep the main tasks visible and easy to understand:
+            market information, produce listings, weather, alerts,
+            notifications, and account management.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+
+          <article class="feature-card">
+            <span class="feature-number">01</span>
+            <h3>Market Prices</h3>
+            <p>
+              View market reference prices with produce, unit, location,
+              source, and date information.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">02</span>
+            <h3>Produce Listings</h3>
+            <p>
+              Farmers can create, update, deactivate, and mark their
+              produce as sold.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">03</span>
+            <h3>Weather Information</h3>
+            <p>
+              See weather information that may affect harvesting,
+              produce availability, and transport.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">04</span>
+            <h3>Price Alerts</h3>
+            <p>
+              Set a target price and receive notifications when a
+              configured condition is satisfied.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         MARKET + WEATHER
+         ========================= -->
+    <section class="section section-soft" id="market">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">MARKET INFORMATION</p>
+          <h2>Compare information before deciding.</h2>
+          <p>
+            Reference information helps farmers make their own selling
+            decisions rather than forcing a price.
+          </p>
+        </div>
+
+        <div class="market-section-grid">
+
+          <article class="panel table-panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Market reference prices</h3>
+                <p>Sample Philippine market data</p>
+              </div>
+
+              <button class="btn btn-outline btn-small" type="button" onclick="refreshPrices(this)">
+                Refresh
+              </button>
+            </div>
+
+            <div class="table-scroll">
+              <table class="market-table">
+                <thead>
+                  <tr>
+                    <th>Produce</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Trend</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+
+                <tbody id="marketTableBody">
+                  <tr>
+                    <td><strong>Rice</strong></td>
+                    <td>Pagadian</td>
+                    <td>₱42.00 / kg</td>
+                    <td class="price-up">+6.3%</td>
+                    <td><span class="reference-tag">Reference</span></td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Corn</strong></td>
+                    <td>Santiago</td>
+                    <td>₱31.50 / kg</td>
+                    <td class="price-up">+2.1%</td>
+                    <td><span class="reference-tag">Reference</span></td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Coconut</strong></td>
+                    <td>Kumalarang</td>
+                    <td>₱18.00 / pc</td>
+                    <td class="price-down">−1.4%</td>
+                    <td><span class="reference-tag">Reference</span></td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>Banana</strong></td>
+                    <td>Mahinog</td>
+                    <td>₱28.00 / kg</td>
+                    <td class="price-up">+3.7%</td>
+                    <td><span class="reference-tag">Reference</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Weather information</h3>
+                <p>Sample local conditions</p>
+              </div>
+            </div>
+
+            <div class="weather-box">
+              <div class="weather-current">
+                <div>
+                  <!-- EDIT: Demo temperature -->
+                  <div class="weather-temp">28°</div>
+                  <div class="weather-condition">Partly cloudy</div>
+                </div>
+                <div class="weather-icon" aria-hidden="true">☁️</div>
+              </div>
+
+              <!-- EDIT: Weather location -->
+              <div class="weather-location">
+                Pagadian City, Zamboanga del Sur
+              </div>
+            </div>
+
+            <div class="forecast-list">
+              <div class="forecast-item"><span>Today</span><strong>28° / 24°</strong></div>
+              <div class="forecast-item"><span>Tomorrow</span><strong>29° / 24°</strong></div>
+              <div class="forecast-item"><span>Wednesday</span><strong>27° / 23°</strong></div>
+              <div class="forecast-item"><span>Thursday</span><strong>28° / 24°</strong></div>
+            </div>
+
+            <button
+              class="btn btn-outline full-width"
+              type="button"
+              onclick="showToast('Weather refresh placeholder is ready for API integration.')"
+            >
+              Refresh weather
+            </button>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         USER ROLES
+         ========================= -->
+    <section class="section" id="roles">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">USER-CENTERED ACCESS</p>
+          <h2>The right tools for every type of user.</h2>
+          <p>
+            Farmers are the primary users, while buyers/vendors,
+            administrators, and guests receive role-appropriate access.
+          </p>
+        </div>
+
+        <div class="role-grid">
+
+          <article class="role-card primary-role">
+            <span class="role-badge">PRIMARY USER</span>
+            <h3>Farmer</h3>
+            <p>
+              Register and manage an account, create and manage produce
+              listings, view market prices and weather, configure alerts,
+              receive notifications, and mark produce as sold or inactive.
+            </p>
+            <button class="btn btn-primary btn-small" type="button" onclick="openModal('registerModal', 'farmer')">
+              Join as Farmer
+            </button>
+          </article>
+
+          <article class="role-card">
+            <span class="role-badge">BROWSE & SEARCH</span>
+            <h3>Buyer / Vendor</h3>
+            <p>
+              Browse available produce, search for products, filter by
+              category or location, and view listing details.
+            </p>
+            <button class="btn btn-outline btn-small" type="button" onclick="openModal('registerModal', 'buyer')">
+              Join as Buyer
+            </button>
+          </article>
+
+          <article class="role-card">
+            <span class="role-badge">MONITOR & MANAGE</span>
+            <h3>Administrator</h3>
+            <p>
+              Manage accounts, roles, categories, listings, market-price
+              records, alerts, notifications, activity logs, and integrations.
+            </p>
+            <button class="btn btn-outline btn-small" type="button" onclick="openModal('loginModal')">
+              Admin Sign In
+            </button>
+          </article>
+
+          <article class="role-card">
+            <span class="role-badge">PUBLIC ACCESS</span>
+            <h3>Guest</h3>
+            <p>
+              Browse public listings, search available produce, and view
+              basic produce information without modifying protected data.
+            </p>
+            <a class="btn btn-outline btn-small" href="#listings">
+              Browse as Guest
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         PRODUCE LISTINGS
+         ========================= -->
+    <section class="section section-soft" id="listings">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">PUBLIC PRODUCE MARKET</p>
+          <h2>Find available agricultural produce.</h2>
+          <p>
+            Guests and buyers/vendors can search and filter active listings.
+            Farmers can manage their own listings after signing in.
+          </p>
+        </div>
+
+        <div class="browser-tools">
+
+          <input
+            class="input"
+            id="searchInput"
+            type="search"
+            placeholder="Search produce..."
+            aria-label="Search produce"
+          >
+
+          <select class="select" id="categoryFilter" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            <option value="grain">Grain</option>
+            <option value="fruit">Fruit</option>
+            <option value="vegetable">Vegetable</option>
+            <option value="coconut">Coconut</option>
+          </select>
+
+          <select class="select" id="locationFilter" aria-label="Filter by location">
+            <option value="all">All locations</option>
+            <option value="Pagadian">Pagadian</option>
+            <option value="Santiago">Santiago</option>
+            <option value="Kumalarang">Kumalarang</option>
+            <option value="Mahinog">Mahinog</option>
+          </select>
+
+          <button class="btn btn-primary" type="button" onclick="openListingModal()">
+            + Add Listing
+          </button>
+
+        </div>
+
+        <div class="listing-grid" id="listingGrid"></div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         ALERTS
+         ========================= -->
+    <section class="section" id="alerts">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">PRICE ALERTS</p>
+          <h2>Know when your target price is reached.</h2>
+          <p>
+            Price conditions can later be evaluated through the backend
+            and delivered as queued notifications.
+          </p>
+        </div>
+
+        <div class="alerts-grid">
+
+          <article class="alert-card">
+            <div class="alert-icon" aria-hidden="true">🔔</div>
+            <h3>Rice target price reached</h3>
+            <p>
+              Your target was ₱40.00/kg. Current reference price:
+              ₱42.00/kg.
+            </p>
+            <button class="btn btn-warning btn-small" type="button" onclick="openDashboard()">
+              Review alert
+            </button>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Recent notifications</h3>
+                <p>In-app notification example</p>
+              </div>
+              <span class="reference-tag">QUEUED</span>
+            </div>
+
+            <div class="notification-list">
+
+              <div class="notification">
+                <i class="notification-dot"></i>
+                <div>
+                  <strong>Rice reached ₱42/kg</strong>
+                  <span>2 minutes ago</span>
+                </div>
+              </div>
+
+              <div class="notification">
+                <i class="notification-dot"></i>
+                <div>
+                  <strong>Corn reference price increased</strong>
+                  <span>Yesterday</span>
+                </div>
+              </div>
+
+              <div class="notification">
+                <i class="notification-dot"></i>
+                <div>
+                  <strong>Weather update available</strong>
+                  <span>Yesterday</span>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         USER FLOW
+         ========================= -->
+    <section class="section section-soft">
+      <div class="container">
+
+        <div class="section-title">
+          <p class="eyebrow">SIMPLE USER FLOW</p>
+          <h2>From information to an informed decision.</h2>
+        </div>
+
+        <div class="workflow">
+
+          <div class="workflow-step">
+            <span class="workflow-number">1</span>
+            <h4>Check prices</h4>
+            <p>View market references.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">2</span>
+            <h4>List produce</h4>
+            <p>Record available produce.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">3</span>
+            <h4>Set target</h4>
+            <p>Configure an alert.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">4</span>
+            <h4>Receive alert</h4>
+            <p>Get a notification.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">5</span>
+            <h4>Make a decision</h4>
+            <p>Review and negotiate.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         CTA
+         ========================= -->
+    <section class="section">
+      <div class="container">
+
+        <div class="cta">
+          <div>
+            <h2>Better information. Better selling decisions.</h2>
+            <p>
+              ArdNet is designed to give smallholder farmers practical
+              market information while making available produce easier
+              for buyers and vendors to discover.
+            </p>
+          </div>
+
+          <button class="btn btn-primary" type="button" onclick="openModal('registerModal', 'farmer')">
+            Create Farmer Account
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <a href="#home" class="brand footer-brand">
+            <span class="brand-mark">A</span>
+            <span class="brand-copy">
+              <strong>ArdNet</strong>
+              <small>Farm-to-Market Price Exchange</small>
+            </span>
+          </a>
+
+          <!-- EDIT: Footer description -->
+          <p>
+            A farmer-first market information platform for agricultural
+            communities in the Philippines.
+          </p>
+        </div>
+
+        <div>
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#market">Market Prices</a></li>
+            <li><a href="#listings">Produce Listings</a></li>
+            <li><a href="#alerts">Price Alerts</a></li>
+            <li><a href="#market">Weather</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Users</h4>
+          <ul>
+            <li><a href="#roles">Farmers</a></li>
+            <li><a href="#roles">Buyers / Vendors</a></li>
+            <li><a href="#roles">Administrators</a></li>
+            <li><a href="#roles">Guests</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Account</h4>
+          <ul>
+            <li><a href="#" onclick="event.preventDefault(); openModal('loginModal')">Sign in</a></li>
+            <li><a href="#" onclick="event.preventDefault(); openModal('registerModal', 'farmer')">Register</a></li>
+            <li><a href="#" onclick="event.preventDefault(); openDashboard()">Dashboard</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        <span>© 2026 ArdNet. All rights reserved.</span>
+        <span>Philippines • Farmer-first market information</span>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =========================
+       LOGIN MODAL
+       ========================= -->
+  <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">SECURE ACCESS</p>
+          <h2 id="loginTitle">Welcome back</h2>
+        </div>
+
+        <button class="close-btn" type="button" onclick="closeModal('loginModal')" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <form class="form" id="loginForm">
+
+        <div class="form-group">
+          <label for="loginEmail">Email address</label>
+          <input class="input" id="loginEmail" type="email" autocomplete="username" placeholder="farmer@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input class="input" id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" minlength="8" required>
+        </div>
+
+        <div id="loginMessage" class="form-message" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button class="btn btn-outline" type="button" onclick="closeModal('loginModal')">
+            Cancel
+          </button>
+
+          <button class="btn btn-primary" type="submit">
+            Log in
+          </button>
+        </div>
+
+      </form>
+
+      <p class="security-note">
+        Demo mode stores prototype account data in your browser.
+        For production, connect this form to a PHP backend using
+        password_hash() and password_verify().
+      </p>
+
+    </div>
+  </div>
+
+
+  <!-- =========================
+       REGISTER MODAL
+       ========================= -->
+  <div class="modal" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+
+        <div>
+          <p class="eyebrow">CREATE ACCOUNT</p>
+          <h2 id="registerTitle">Join ArdNet</h2>
+        </div>
+
+        <button class="close-btn" type="button" onclick="closeModal('registerModal')" aria-label="Close">
+          ×
+        </button>
+
+      </div>
+
+      <form class="form" id="registerForm">
+
+        <div class="form-group">
+          <label for="registerName">Full name</label>
+          <input class="input" id="registerName" type="text" autocomplete="name" placeholder="Juan Dela Cruz" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email address</label>
+          <input class="input" id="registerEmail" type="email" autocomplete="email" placeholder="farmer@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input class="input" id="registerPassword" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerRole">Account role</label>
+
+          <select class="select" id="registerRole" required>
+            <option value="farmer">Farmer</option>
+            <option value="buyer">Buyer / Vendor</option>
+          </select>
+
+          <small>
+            Administrator accounts should be assigned by the backend, not self-selected.
+          </small>
+        </div>
+
+        <div id="registerMessage" class="form-message" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button class="btn btn-outline" type="button" onclick="closeModal('registerModal')">
+            Cancel
+          </button>
+
+          <button class="btn btn-primary" type="submit">
+            Create account
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       PRODUCE LISTING MODAL
+       ========================= -->
+  <div class="modal" id="listingModal" role="dialog" aria-modal="true" aria-labelledby="listingTitle">
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">PRODUCE LISTING</p>
+          <h2 id="listingTitle">Create a listing</h2>
+        </div>
+
+        <button class="close-btn" type="button" onclick="closeModal('listingModal')" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <form class="form" id="listingForm">
+
+        <input type="hidden" id="editListingId">
+
+        <div class="form-group">
+          <label for="produceName">Produce name</label>
+          <input class="input" id="produceName" type="text" placeholder="Rice" required>
+        </div>
+
+        <div class="form-group">
+          <label for="produceCategory">Category</label>
+          <select class="select" id="produceCategory" required>
+            <option value="grain">Grain</option>
+            <option value="fruit">Fruit</option>
+            <option value="vegetable">Vegetable</option>
+            <option value="coconut">Coconut</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="produceQuantity">Quantity</label>
+          <input class="input" id="produceQuantity" type="number" min="1" placeholder="250" required>
+        </div>
+
+        <div class="form-group">
+          <label for="produceUnit">Unit</label>
+          <select class="select" id="produceUnit" required>
+            <option value="kg">kg</option>
+            <option value="sack">sack</option>
+            <option value="piece">piece</option>
+            <option value="bundle">bundle</option>
+            <option value="crate">crate</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="produceLocation">Location</label>
+          <select class="select" id="produceLocation" required>
+            <option value="Pagadian">Pagadian</option>
+            <option value="Santiago">Santiago</option>
+            <option value="Kumalarang">Kumalarang</option>
+            <option value="Mahinog">Mahinog</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="producePrice">Asking price</label>
+          <input class="input" id="producePrice" type="number" min="0" step="0.01" placeholder="40" required>
+          <small>Reference prices do not force a farmer's selling price.</small>
+        </div>
+
+        <div id="listingMessage" class="form-message" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button class="btn btn-outline" type="button" onclick="closeModal('listingModal')">
+            Cancel
+          </button>
+
+          <button class="btn btn-primary" type="submit">
+            Save listing
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+
+  <!-- =========================
+       DASHBOARD DRAWER
+       ========================= -->
+  <div class="drawer" id="dashboardDrawer">
+
+    <aside class="drawer-content">
+
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">ARDNET DASHBOARD</p>
+          <h2 id="dashboardName">Farmer dashboard</h2>
+        </div>
+
+        <button class="close-btn" type="button" onclick="closeDashboard()" aria-label="Close dashboard">
+          ×
+        </button>
+      </div>
+
+      <div id="dashboardLoginWarning" class="admin-warning">
+        You're browsing as a guest. Sign in as a farmer to manage your own listings and alerts.
+      </div>
+
+      <div class="dashboard-summary">
+        <div class="summary-card">
+          <span>Rice reference</span>
+          <strong>₱42/kg</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>Active listings</span>
+          <strong id="dashboardListings">0</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>Price alerts</span>
+          <strong>2</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>Notifications</span>
+          <strong>3</strong>
+        </div>
+      </div>
+
+      <article class="panel dashboard-panel">
+        <div class="panel-heading">
+          <div>
+            <h3>Quick actions</h3>
+            <p>Common farmer activities</p>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="btn btn-primary full-width" type="button" onclick="closeDashboard(); openListingModal()">
+            + Create produce listing
+          </button>
+
+          <button class="btn btn-outline full-width" type="button" onclick="closeDashboard(); scrollToSection('listings')">
+            View my listings
+          </button>
+
+          <button class="btn btn-outline full-width" type="button" onclick="showToast('Price alert form is ready for backend integration.')">
+            Create price alert
+          </button>
+
+          <button class="btn btn-outline full-width" type="button" onclick="showToast('Notifications marked as read.')">
+            Mark notifications as read
+          </button>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <h3>System integration</h3>
+            <p>Proof-of-concept status</p>
+          </div>
+        </div>
+
+        <div class="notification-list">
+          <div class="notification">
+            <i class="notification-dot"></i>
+            <div>
+              <strong>REST / JSON</strong>
+              <span>Ready for connected backend</span>
+            </div>
+          </div>
+
+          <div class="notification">
+            <i class="notification-dot"></i>
+            <div>
+              <strong>SOAP / XML</strong>
+              <span>Service placeholder ready</span>
+            </div>
+          </div>
+
+          <div class="notification">
+            <i class="notification-dot"></i>
+            <div>
+              <strong>Message Queue</strong>
+              <span>Alert workflow placeholder ready</span>
+            </div>
+          </div>
+
+          <div class="notification">
+            <i class="notification-dot"></i>
+            <div>
+              <strong>Weather API</strong>
+              <span>External integration placeholder ready</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </aside>
+  </div>
+
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
