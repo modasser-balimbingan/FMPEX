@@ -1,0 +1,12 @@
+{
+  "name": "ardnet-modular-react-workspace",
+  "private": true,
+  "workspaces": [
+    "ArdNet_Modular_React_Clean"
+  ],
+  "scripts": {
+    "dev": "npm --prefix .\\ArdNet_Modular_React_Clean run dev",
+    "build": "npm --prefix .\\ArdNet_Modular_React_Clean run build",
+    "preview": "npm --prefix .\\ArdNet_Modular_React_Clean run preview"
+  }
+}
