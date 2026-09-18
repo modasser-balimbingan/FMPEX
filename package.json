@@ -2,7 +2,7 @@
   "name": "ardnet-modular-react-workspace",
   "private": true,
   "workspaces": [
-    "ArdNet_Modular_React_Clean"
+    "ArdNet"
   ],
   "scripts": {
     "dev": "npm --prefix .\\ArdNet run dev",
