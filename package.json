@@ -5,8 +5,8 @@
     "ArdNet_Modular_React_Clean"
   ],
   "scripts": {
-    "dev": "npm --prefix .\\ArdNet_Modular_React_Clean run dev",
-    "build": "npm --prefix .\\ArdNet_Modular_React_Clean run build",
-    "preview": "npm --prefix .\\ArdNet_Modular_React_Clean run preview"
+    "dev": "npm --prefix .\\ArdNet run dev",
+    "build": "npm --prefix .\\ArdNet run build",
+    "preview": "npm --prefix .\\ArdNet run preview"
   }
 }
