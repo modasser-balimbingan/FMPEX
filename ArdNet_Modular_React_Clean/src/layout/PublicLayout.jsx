@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 export default function PublicLayout() {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const dashboardPath = user?.role === 'admin' ? '/admin' : user?.role === 'buyer' ? '/buyer' : '/dashboard';
   const isLandingPage = pathname === '/';
 
@@ -24,7 +24,7 @@ export default function PublicLayout() {
             <NavLink to="/admin/login">Admin</NavLink>
           </nav>
           {isLandingPage && <div className="nav-actions">
-            {user ? (
+            {isAuthenticated ? (
               <>
                 <Link className="btn btn-outline btn-small" to={dashboardPath}>
                   <LayoutDashboard size={15} aria-hidden="true" />
