@@ -17,10 +17,12 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminModulePage from './pages/AdminModulePage';
 import NotFoundPage from './pages/NotFoundPage';
 import AccountPage from './pages/AccountPage';
+import SearchMetadata from './components/common/SearchMetadata';
 
 export default function App() {
   return (
     <>
+      <SearchMetadata />
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
