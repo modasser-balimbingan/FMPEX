@@ -1633,3 +1633,225 @@ a {
     white-space: nowrap;
   }
 }
+
+/* Mobile-first refinements for narrow screens and touch navigation */
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 32px, 1240px);
+  }
+
+  .nav {
+    gap: 8px;
+    padding-block: 10px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-copy strong {
+    font-size: 20px;
+  }
+
+  .brand-copy small {
+    font-size: 8px;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav-actions .btn {
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+
+  .nav-links {
+    order: 2;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 2px 2px 6px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(60, 139, 85, .08);
+    white-space: nowrap;
+  }
+
+  .nav-links a.active {
+    background: $sage-soft;
+    box-shadow: none;
+  }
+
+  .hero {
+    padding: 44px 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 9vw, 44px);
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .market-card {
+    padding: 20px;
+  }
+
+  .market-price {
+    font-size: clamp(34px, 10vw, 44px);
+  }
+
+  .section {
+    padding-block: 48px;
+  }
+
+  .section-title h2 {
+    font-size: clamp(28px, 7.5vw, 36px);
+  }
+
+  .alerts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-page {
+    padding: 16px;
+  }
+
+  .auth-card,
+  .listing-editor {
+    padding: 22px 18px;
+  }
+
+  .auth-card h1,
+  .page-heading h1 {
+    font-size: clamp(28px, 8vw, 36px);
+    overflow-wrap: anywhere;
+  }
+
+  .sidebar {
+    min-height: 0;
+    padding: 14px 16px;
+  }
+
+  .sidebar .brand {
+    margin-bottom: 10px;
+  }
+
+  .sidebar-profile {
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    grid-template-columns: none;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .sidebar-nav a {
+    flex: 0 0 auto;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+
+  .sidebar-bottom {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+
+  .sidebar-bottom a,
+  .sidebar-bottom button {
+    min-height: 44px;
+  }
+
+  .admin-module-nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .admin-module-nav a {
+    flex: 0 0 auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .dashboard-topbar {
+    min-height: 64px;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+  }
+
+  .dashboard-container {
+    padding: 18px 16px;
+  }
+
+  .listing-actions .btn {
+    min-height: 44px;
+    flex: 1 1 120px;
+    white-space: normal;
+  }
+
+  .empty-state {
+    padding: 28px 16px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .brand-copy small {
+    display: none;
+  }
+
+  .dashboard-topbar-user {
+    gap: 6px;
+  }
+
+  .dashboard-topbar-user > span:last-child {
+    max-width: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
