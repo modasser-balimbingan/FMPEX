@@ -425,6 +425,11 @@ a {
   gap: 18px;
 }
 
+.market-section-grid > *,
+.dashboard-sections > * {
+  min-width: 0;
+}
+
 .market-table-card {
   padding: 22px;
 }
