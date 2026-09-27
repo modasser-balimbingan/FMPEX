@@ -40,11 +40,14 @@ export default function SearchMetadata() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const page = publicPages[pathname];
+    const normalizedPath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '');
+    const page = Object.prototype.hasOwnProperty.call(publicPages, normalizedPath)
+      ? publicPages[normalizedPath]
+      : undefined;
     const title = page?.title ?? 'ArdNet';
     const description = page?.description ?? 'ArdNet is a farm-to-market price exchange for Philippine farmers and produce buyers.';
     const robots = page ? 'index, follow' : 'noindex, nofollow';
-    const canonicalUrl = `${window.location.origin}${pathname}`;
+    const canonicalUrl = `${window.location.origin}${normalizedPath}`;
 
     document.title = title;
     setMeta('name', 'description', description);
