@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ArdNet — Farm-to-Market Price Exchange for Philippine farmers, buyers, vendors, and administrators." />
+    <meta name="theme-color" content="#1f5d42" />
+    <title>ArdNet | Farm-to-Market Price Exchange</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <div id="progressive-fallback" class="pe-fallback">
+      <header class="pe-header">
+        <div class="pe-container pe-header-inner">
+          <a class="pe-brand" href="/" aria-label="ArdNet home">
+            <span class="pe-brand-mark">A</span>
+            <span>
+              <strong>ArdNet</strong>
+              <small>Farm-to-Market Price Exchange</small>
+            </span>
+          </a>
+
+          <nav aria-label="Primary navigation">
+            <a href="/market">Market Prices</a>
+            <a href="/listings">Produce</a>
+            <a href="/weather">Weather</a>
+            <a href="/login">Sign in</a>
+            <a href="/register">Register</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="pe-hero">
+          <div class="pe-container">
+            <p class="pe-eyebrow">FARM-TO-MARKET INFORMATION</p>
+            <h1>Market information for farmers, buyers, and vendors.</h1>
+            <p>
+              Browse produce listings, view reference market prices, check weather
+              information, and use price alerts through ArdNet.
+            </p>
+            <div class="pe-actions">
+              <a class="pe-button pe-primary" href="/listings">Browse Produce</a>
+              <a class="pe-button" href="/market">View Market Prices</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="pe-section" aria-labelledby="pe-market-title">
+          <div class="pe-container">
+            <div class="pe-section-heading">
+              <p class="pe-eyebrow">REFERENCE INFORMATION</p>
+              <h2 id="pe-market-title">Latest market prices</h2>
+              <p>These are reference values, not mandatory selling prices.</p>
+            </div>
+
+            <div class="pe-table-wrap">
+              <table class="pe-table">
+                <caption class="visually-hidden">Sample ArdNet market reference prices</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Produce</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Rice</th>
+                    <td>Pagadian</td>
+                    <td>₱42.00</td>
+                    <td>kg</td>
+                    <td>Sep 16, 2026</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Corn</th>
+                    <td>Santiago</td>
+                    <td>₱31.50</td>
+                    <td>kg</td>
+                    <td>Sep 16, 2026</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Coconut</th>
+                    <td>Kumalarang</td>
+                    <td>₱18.00</td>
+                    <td>piece</td>
+                    <td>Sep 16, 2026</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="pe-section pe-muted" aria-labelledby="pe-actions-title">
+          <div class="pe-container">
+            <div class="pe-section-heading">
+              <p class="pe-eyebrow">SYSTEM MODULES</p>
+              <h2 id="pe-actions-title">Use ArdNet by role</h2>
+            </div>
+
+            <div class="pe-grid">
+              <article class="pe-card">
+                <h3>Farmer</h3>
+                <p>Manage your produce listings, market prices, alerts, and notifications.</p>
+                <a href="/login">Farmer sign in</a>
+              </article>
+
+              <article class="pe-card">
+                <h3>Buyer / Vendor</h3>
+                <p>Browse, search, and filter available agricultural produce.</p>
+                <a href="/listings">Browse listings</a>
+              </article>
+
+              <article class="pe-card">
+                <h3>Administrator</h3>
+                <p>Manage users, categories, listings, price records, alerts, and audit logs.</p>
+                <a href="/admin/login">Administrator login</a>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="pe-footer">
+        <div class="pe-container pe-footer-inner">
+          <span>© 2026 ArdNet</span>
+          <span>Farm-to-Market Price Exchange</span>
+        </div>
+      </footer>
+    </div>
+
+    <div id="root" aria-live="polite"></div>
+
+    <noscript>
+      <div class="no-js-message" role="status">
+        JavaScript is disabled. ArdNet is showing its basic HTML interface.
+        JavaScript enables dashboards, protected routes, filters, forms, and other interactive features.
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

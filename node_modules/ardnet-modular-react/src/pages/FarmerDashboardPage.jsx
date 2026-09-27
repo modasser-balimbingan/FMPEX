@@ -1,0 +1,8 @@
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Card from '../components/common/Card';
+import StatCard from '../components/ui/StatCard';
+import PriceTable from '../components/ui/PriceTable';
+import AlertPanel from '../features/alerts/AlertPanel';
+import { useListings } from '../hooks/useListings';
+export default function FarmerDashboardPage(){const user=useSelector(s=>s.auth.user);const {listings}=useListings();const own=listings.filter(x=>x.farmer===user?.name&&x.status==='Active');return <div className="page"><div className="page-heading"><div><p className="eyebrow">FARMER DASHBOARD</p><h1>Good morning, {user?.name}.</h1><p className="muted">Here’s what may affect your next sale.</p></div><Link className="btn btn-primary" to="/listings">Browse produce</Link></div><div className="grid grid-4"><StatCard label="Rice reference" value="₱42/kg"/><StatCard label="My active listings" value={own.length}/><StatCard label="Price alerts" value="2"/><StatCard label="Notifications" value="3"/></div><div className="dashboard-sections"><PriceTable compact/><Card style={{padding:22}}><div className="panel-heading"><div><h3>Quick actions</h3><p>Common farmer tasks</p></div></div><div className="quick-actions"><Link className="btn btn-primary full-width" to="/listings">View produce listings</Link><button className="btn btn-outline full-width">Create price alert</button><button className="btn btn-outline full-width">View notifications</button></div></Card></div><div style={{marginTop:22}}><div className="section-title compact-title"><p className="eyebrow">PRICE ALERTS</p><h2>Recent alerts</h2></div><AlertPanel/></div></div>}
