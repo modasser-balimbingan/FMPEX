@@ -1,0 +1,312 @@
+ARDNET GUI - CONSERVATIVE CODE CLEANUP REPORT
+Date: November 21, 2026 (Asia/Taipei)
+Baseline Git commit: a9f5168a4d36ff1c609407133c98111d309d360d
+
+PURPOSE AND METHOD
+Remove verified dead source files, obsolete CSS, unused dependencies, and debug-only work while preserving existing features and UI.
+Imports, re-exports, static require calls, package scripts, tests, and maintenance entry points were traced. CSS candidates were checked against frontend source and index.html, with dynamic class prefixes retained. Browser comparisons use fixed sample responses rather than the live database.
+
+1. DELETED SOURCE FILES (9)
+
+ARDNET_Frontend/src/api/api.js
+  Removed: 272 bytes; 11 source lines.
+  Reason: Unused legacy roles fetcher with its own localhost:3000 base URL. No imports or callers.
+  Original SHA-256: c43fdca6e366db8f8f7f25e43c6439c8d3d780c38efc247c4bfa73ade4d4d554
+
+ARDNET_Frontend/src/api/services/listingsService.js
+  Removed: 1640 bytes; 60 source lines.
+  Reason: Unused duplicate JSON listing service. Live listing operations continue through src/api/ListingsApi.js, including multipart photo uploads.
+  Original SHA-256: b64a9906f410e277f5375740bea3d5e76b544a5848f5d6543c0e29b2fad9727b
+
+ARDNET_Frontend/src/api/services/rolesService.js
+  Removed: 514 bytes; 26 source lines.
+  Reason: Only exposed by unused rolesService/getRoles barrel exports. Registration uses the existing role constants; the backend roles endpoint remains available.
+  Original SHA-256: 80b9eb8b9a61a3b8bf947f02deb9d570a75ce218417c29ba323854d983093d02
+
+ARDNET_Frontend/src/components/common/Modal.jsx
+  Removed: 1154 bytes; 47 source lines.
+  Reason: Unused older modal implementation. The live native listing-details dialog and discussion UI remain in place.
+  Original SHA-256: aa6b5f40e7851df8778ac166c90a431dfc65f45d39b89f6f94672e220612ab0a
+
+ARDNET_Frontend/src/components/ui/StatCard.jsx
+  Removed: 221 bytes; 5 source lines.
+  Reason: Unused old statistics-card component. Current member/admin overview cards do not import it.
+  Original SHA-256: 4a6b19cedbf4f0db93870a5751cde6779a45f54eade879caab2fedba49960f59
+
+ARDNET_Frontend/src/features/admin/AdminSidebar.jsx
+  Removed: 614 bytes; 24 source lines.
+  Reason: Unused old admin navigation. All dashboard roles use the existing shared MemberDashboardLayout and adminNavigation.
+  Original SHA-256: 97e09fddf7d038f3f95f53ab4f505f21fcb4ade677dae1efd10a8ad5b6049446
+
+ARDNET_Frontend/src/hooks/index.js
+  Removed: 240 bytes; 9 source lines.
+  Reason: Unused hooks re-export barrel. Existing consumers import their hooks directly.
+  Original SHA-256: ef8e8baeecfebf2c275f6f5f7a410a6df6f8f52123272fd8868104be737fcbba
+
+ARDNET_Frontend/src/hooks/useApi.js
+  Removed: 1965 bytes; 80 source lines.
+  Reason: Unused useApi/useApiMutation implementations; no live component imports or invokes them.
+  Original SHA-256: ddf76aa9d9c336c6760a20704d72e62a6a3ecd955e1d3983ee685159677cf7b6
+
+ARDNET_Backend/src/services/auditService.js
+  Removed: 1019 bytes; 53 source lines.
+  Reason: Unused logAudit helper; no runtime, test, or maintenance-script callers. The actual audit SQL in adminUserController and the audit retrieval endpoint are retained.
+  Original SHA-256: 07aa3536a2c147a8bfad09ee103ce0c6ab75f80c9cb070b1cbdad8ddc22ea319
+
+2. REMOVED CODE WITHIN RETAINED FILES
+ARDNET_Frontend/src/api/index.js
+  Removed unused rolesService re-export and getRoles compatibility wrapper, including its dynamic import.
+ARDNET_Frontend/src/api/services/authService.js
+  Removed inspectToken and its invocation. Token validation, storage, refresh-token handling, and login/register responses remain unchanged.
+ARDNET_Backend/src/routes/favorites.js
+  Removed unused addFavorite/removeFavorite imports. POST/DELETE favorites still use their existing routes/listings.js endpoints.
+ARDNET_Backend/src/middleware/auth.js
+  Removed six verbose token-metadata console calls and their section-length mapping. Bearer parsing, malformed-JWT checks, JWT verification, account-status checks, suspension handling, and role authorization remain unchanged.
+ARDNET_Backend/src/server.js
+  Removed the per-request debug logger middleware, two route-mount messages, and a hard-coded startup endpoint listing. Server startup/port output, SOAP enablement output, error handlers, and every existing API route remain.
+ARDNET_Backend/package.json
+  Removed unused joi dependency. Replaced the placeholder failing test command with node --test so npm test runs the existing suite.
+ARDNET_Backend/package-lock.json
+  npm removed joi and seven dependencies that were not required by any retained package:
+    @hapi/address@5.1.1
+    @hapi/formula@3.0.2
+    @hapi/hoek@11.0.7
+    @hapi/pinpoint@2.0.1
+    @hapi/tlds@1.1.7
+    @hapi/topo@6.0.2
+    @standard-schema/spec@1.1.0
+    joi@18.2.9
+
+3. OBSOLETE STYLES REMOVED
+ARDNET_Frontend/src/styles/style.scss
+  Removed 186 complete rules and trimmed retired selectors from 8 mixed rules.
+  Removed 1 media group made empty by this cleanup.
+  Source size: 43303 -> 25091 bytes.
+  Covers retired home/market/weather markup, old auth wrappers/password controls, old dashboard/sidebar/statistics markup, the unused admin sidebar, old listing cards/photo previews, old notification rows, and old settings-card markup.
+  Shared live rules, input states, active feature stylesheets, dynamic variants, reduced-motion behavior, and the progressive HTML fallback are retained.
+  The two manually confirmed retired root classes were sidebar and dashboard-shell. settings-${name} is an input ID, not a generated CSS class.
+
+  Removed orphan comment headings left behind by the retired photo/settings blocks and renamed the surviving password-validation heading.
+  Exact removed selectors (line numbers refer to the pre-cleanup style.scss):
+    Original line 150: .full-width
+    Original line 180: .text-button
+    Original line 267: .hero-actions, .listing-actions, .quick-actions [mixed rule retained: .nav-actions, .form-actions]
+    Original line 279: .hero
+    Original line 284: .hero-grid
+    Original line 291: .hero h1
+    Original line 300: .hero-description
+    Original line 306: .hero-actions
+    Original line 310: .market-card
+    Original line 315: .market-top, .listing-top, .weather-current [mixed rule retained: .panel-heading, .page-heading]
+    Original line 325: .market-top
+    Original line 330: .market-label, .listing-category
+    Original line 336: .market-product
+    Original line 340: .market-product-name
+    Original line 351: .market-change, .price-up [mixed rule retained: .positive]
+    Original line 366: .bar
+    Original line 372: .chart-label
+    Original line 381: .section-soft
+    Original line 386: .section-title
+    Original line 391: .section-title h2
+    Original line 404: .grid-2
+    Original line 405: .grid-3
+    Original line 406: .grid-4
+    Original line 408: .feature-card
+    Original line 413: .feature-number
+    Original line 420: .market-section-grid, .dashboard-sections
+    Original line 427: .market-section-grid > *, .dashboard-sections > *
+    Original line 432: .market-table-card
+    Original line 436: .table-wrapper [mixed rule retained: .table-scroll]
+    Original line 464: .weather-panel
+    Original line 468: .weather-box
+    Original line 474: .weather-temp
+    Original line 480: .weather-condition
+    Original line 485: .weather-icon
+    Original line 511: .auth-page
+    Original line 519: .auth-wrap
+    Original line 523: .auth-wrap > .brand
+    Original line 620: .auth-foot [mixed rule retained: .security-note]
+    Original line 626: .auth-foot
+    Original line 631: .auth-foot a
+    Original line 668: .password-input-wrapper
+    Original line 674: .password-input-wrapper .input
+    Original line 681: .password-input-wrapper .password-toggle
+    Original line 705: .dashboard-shell
+    Original line 711: .sidebar
+    Original line 720: .sidebar .brand
+    Original line 725: .sidebar .brand-copy small
+    Original line 729: .sidebar-role
+    Original line 736: .sidebar-profile
+    Original line 747: .avatar
+    Original line 757: .sidebar-profile div:last-child
+    Original line 761: .sidebar-profile strong
+    Original line 765: .sidebar-profile span
+    Original line 770: .sidebar-nav, .sidebar-bottom
+    Original line 776: .sidebar-nav a, .sidebar-bottom a, .sidebar-bottom button
+    Original line 793: .sidebar-nav a.active, .sidebar-nav a:hover, .sidebar-bottom a:hover, .sidebar-bottom button:hover
+    Original line 801: .sidebar-bottom
+    Original line 807: .dashboard-main
+    Original line 811: .dashboard-topbar
+    Original line 821: .dashboard-topbar > div:first-child
+    Original line 825: .dashboard-topbar strong
+    Original line 829: .dashboard-topbar span
+    Original line 834: .dashboard-topbar-user
+    Original line 840: .notification-dot
+    Original line 852: .dashboard-container
+    Original line 877: .stat-card
+    Original line 881: .stat-card span, .stat-card small
+    Original line 887: .stat-card strong
+    Original line 910: .quick-actions
+    Original line 914: .browser-tools
+    Original line 937: .listing-form .image-field [mixed rule retained: .listing-form .form-actions]
+    Original line 942: .file-input
+    Original line 947: .image-field small
+    Original line 953: .listing-card
+    Original line 957: .listing-top
+    Original line 961: .listing-status
+    Original line 966: .listing-card h3
+    Original line 973: .listing-image
+    Original line 980: .listing-image img
+    Original line 987: .listing-image-placeholder
+    Original line 998: .listing-photo-gallery
+    Original line 1007: .listing-photo-gallery img
+    Original line 1016: .listing-image-placeholder
+    Original line 1027: .listing-meta
+    Original line 1033: .listing-price
+    Original line 1040: .listing-contact
+    Original line 1047: .listing-contact a
+    Original line 1052: .listing-actions
+    Original line 1056: .alerts-grid
+    Original line 1062: .alert-card
+    Original line 1066: .admin-layout
+    Original line 1072: .admin-module-nav
+    Original line 1083: .admin-module-nav a
+    Original line 1091: .admin-module-nav a.active, .admin-module-nav a:hover
+    Original line 1097: .activity-list, .integration-list, .notification-list
+    Original line 1103: .activity-list div, .integration-list div
+    Original line 1110: .activity-list div
+    Original line 1114: .activity-list span, .integration-list div
+    Original line 1120: .integration-list div
+    Original line 1126: .status-online
+    Original line 1127: .status-warning
+    Original line 1149: .module-placeholder
+    Original line 1159: .module-placeholder span
+    Original line 1164: .notification-row
+    Original line 1174: .notification-row:last-child
+    Original line 1178: .notification-icon
+    Original line 1189: .notification-row strong
+    Original line 1194: .notification-row p
+    Original line 1200: .notification-row small
+    Original line 1205: .empty-state
+    Original line 1474: .hero-grid, .market-section-grid, .dashboard-sections, .admin-layout
+    Original line 1487: .grid-4
+    Original line 1491: .grid-3
+    Original line 1540: .browser-tools
+    Original line 1544: .browser-tools .input
+    Original line 1550: .grid-4, .grid-3, .grid-2
+    Original line 1556: .dashboard-shell
+    Original line 1560: .sidebar
+    Original line 1564: .sidebar-nav
+    Original line 1572: .dashboard-topbar
+    Original line 1576: .dashboard-container
+    Original line 1584: .hero
+    Original line 1588: .hero h1
+    Original line 1592: .notification-row
+    Original line 1596: .notification-row .status
+    Original line 1601: .browser-tools .input
+    Original line 1605: .listing-actions .btn [mixed rule retained: .form-actions .btn]
+    Original line 1616: .listing-actions .btn svg, .listing-meta svg, .listing-contact svg [mixed rule retained: .site-header .btn svg]
+    Original line 1623: .dashboard-main
+    Original line 1628: .dashboard-container
+    Original line 1647: .listing-card
+    Original line 1654: .listing-meta span, .listing-contact a
+    Original line 1661: .listing-actions
+    Original line 1669: .listing-actions .btn
+    Original line 1673: .listing-details
+    Original line 1684: .listing-details strong
+    Original line 1688: .quick-actions
+    Original line 1693: .alerts-section
+    Original line 1707: .listing-card
+    Original line 1715: .dashboard-topbar
+    Original line 1719: .dashboard-topbar-user > span:last-child
+    Original line 1785: .hero
+    Original line 1789: .hero h1
+    Original line 1793: .hero-description
+    Original line 1797: .market-card
+    Original line 1809: .section-title h2
+    Original line 1813: .alerts-grid
+    Original line 1817: .auth-page
+    Original line 1832: .sidebar
+    Original line 1837: .sidebar .brand
+    Original line 1841: .sidebar-profile
+    Original line 1846: .sidebar-nav
+    Original line 1856: .sidebar-nav a
+    Original line 1862: .sidebar-bottom
+    Original line 1869: .sidebar-bottom a, .sidebar-bottom button
+    Original line 1874: .admin-module-nav
+    Original line 1881: .admin-module-nav a
+    Original line 1889: .dashboard-topbar
+    Original line 1895: .dashboard-container
+    Original line 1899: .listing-actions .btn
+    Original line 1905: .empty-state
+    Original line 1925: .dashboard-topbar-user
+    Original line 1929: .dashboard-topbar-user > span:last-child
+    Original line 1950: .image-preview
+    Original line 1958: .image-preview > div
+    Original line 1966: .image-preview img
+    Original line 1976: .remove-photo-button
+    Original line 1994: .remove-photo-button:hover
+    Original line 2004: .settings-card
+    Original line 2013: .settings-card > h3
+    Original line 2021: .settings-description
+    Original line 2029: .settings-form
+    Original line 2034: .settings-form .form-group
+    Original line 2044: .settings-form .input
+    Original line 2061: .settings-form .input:focus
+    Original line 2069: .settings-password-section
+    Original line 2075: .settings-section-heading
+    Original line 2082: .settings-password-section .settings-description
+    Original line 2086: .settings-checkbox
+    Original line 2096: .settings-checkbox input
+    Original line 2104: .settings-actions
+    Original line 2111: .settings-actions .btn
+    Original line 2123: .settings-actions .btn:hover:not(:disabled)
+    Original line 2128: .settings-actions .btn:disabled
+    Original line 2134: .settings-role
+    Original line 2147: .settings-role-label
+    Original line 2153: .settings-role-value
+    Original line 2165: .settings-save-section
+    Original line 2171: .settings-save-section .settings-actions
+    Original line 2177: .settings-card
+    Original line 2182: .settings-card > h3
+    Original line 2186: .settings-form
+    Original line 2190: .settings-actions
+    Original line 2194: .settings-actions .btn
+
+4. MEASURED PRODUCTION ASSET CHANGES
+CSS: 167538 -> 153724 bytes (8.25% smaller).
+CSS gzip: 31489 -> 28822 bytes (8.47% smaller).
+JavaScript: 480944 -> 480704 bytes.
+JavaScript gzip: 144430 -> 144370 bytes.
+Unreachable source files were already excluded or tree-shaken from production; deleting them primarily reduces maintenance burden. CSS removal reduces delivered/parsed styles. Removing request/token debug logging removes routine console work. Uninstalling joi reduces dependency/install footprint. These figures are asset sizes, not a claim that the whole application runs that percentage faster.
+
+5. VALIDATION
+Baseline: frontend production build passed; all 70 backend tests passed.
+After cleanup: frontend production build passed; npm test passed all 70 backend tests.
+Backend JavaScript syntax: 51 files passed.
+Static import audit: 133 JavaScript/JSX files parsed; no unresolved relative imports and no unreferenced modules after including application, worker, tests, migration, and script entry points.
+Production dependency tree: npm ls --omit=dev --depth=0 passed.
+Browser comparison: all 170 initial before/after DOM geometry and computed-style comparisons matched across 42 public/member/admin routes in desktop/mobile and light/dark modes, including listing/dialog and notification-opening cases. No JavaScript exceptions or retired-selector matches. The final settings-only rule removal was checked again across all three account roles and both themes (14 additional comparisons).
+Listing/discussion regression: all 27 checks passed, covering photo navigation, favorites, comment/reply creation/editing/deletion, failed-reply draft retention, empty/error/retry states, role restrictions, focus/scroll restoration, and widths from 320px to 1440px. All mutations used intercepted local test fixtures.
+git diff --check passed.
+
+6. PRESERVED AND OUT OF SCOPE
+No database contents, migrations, user-uploaded photos, environment values, credentials, authentication rules, or HTTP API endpoints/responses were changed.
+No real emails were sent, no live form submissions were made, and no existing backend/worker services were restarted by this task.
+Historical ZIP/.bak backups, root package files, maintenance scripts, SOAP examples, all existing tests, and the system-certificate support were retained. They are not automatically safe to delete merely because they are not browser imports.
+No new dependencies, framework replacements, or unrelated feature rewrites were introduced.
+
+7. REVIEW AND RECOVERY
+Every removal is visible in git diff. No commit was created by this task.
+To recover one deleted source file before committing, use git restore --source=HEAD -- <the exact file path>. Review existing local edits before restoring modified files.
+For the backend cleanup to take effect in your running development session, stop and restart the existing backend/worker processes when convenient; do not start a second backend on the same port.

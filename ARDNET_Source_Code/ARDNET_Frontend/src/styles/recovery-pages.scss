@@ -1,0 +1,42 @@
+.auth-experience--recovery {
+  .recovery-symbol { display: grid; place-items: center; width: 59px; height: 59px; margin-bottom: 24px; border: 1px solid #d1e3c5; border-radius: 17px; background: #eaf4e1; color: #548649; }
+  .recovery-symbol--loading svg { animation: recovery-breathe 1.8s ease-in-out infinite; }
+  .recovery-form { display: grid; gap: 19px; }
+  .recovery-form .form-group { margin: 0; }
+  .recovery-form .form-message { margin: 0; }
+  .recovery-form .btn, .recovery-primary { width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+  .recovery-note { display: flex; align-items: start; gap: 10px; margin: 21px 0 0; padding: 15px; border: 1px solid #e0ead6; border-radius: 10px; background: #f4f9ee; color: #6b7f60; font-size: 12px; line-height: 1.8; }
+  .recovery-note svg { margin-top: 3px; flex: 0 0 auto; }
+  .recovery-steps { display: grid; gap: 13px; padding: 0; margin: 24px 0; list-style: none; }
+  .recovery-steps li { display: flex; align-items: start; gap: 11px; color: #6a7d60; font-size: 12px; line-height: 1.8; }
+  .recovery-steps li > span { display: grid; place-items: center; width: 23px; height: 23px; flex: 0 0 auto; border-radius: 50%; background: #eaf3e0; color: #69924e; font-size: 10px; }
+  .recovery-address { display: grid; gap: 5px; margin: 20px 0; padding: 15px 17px; border: 1px solid #dbe7d1; border-radius: 10px; background: #f5f9ef; }
+  .recovery-address small { color: #7b8b6e; font-size: 11px; }
+  .recovery-address strong { color: #47733d; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+  .recovery-actions { display: grid; gap: 12px; margin-top: 23px; }
+  .recovery-error-link { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; margin-top: 12px; color: #497e42; font-size: 12px; font-weight: 500; }
+  .recovery-checklist { display: flex; align-items: center; gap: 8px; margin: 0; color: #6b805e; font-size: 12px; line-height: 1.7; }
+  .recovery-checklist.is-valid { color: #44814b; }
+  .password-mismatch { color: #a34840; }
+  .recovery-loading { display: flex; align-items: center; gap: 10px; padding: 17px; border-radius: 11px; background: #f2f8ea; color: #64834e; font-size: 13px; line-height: 1.8; }
+  .recovery-loading > span { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: #77a55b; animation: recovery-breathe 1.8s ease-in-out infinite; }
+  .recovery-verification-result { margin-bottom: 20px; }
+  .recovery-text { margin: 0; color: #6c7f61; font-size: 13px; line-height: 1.85; }
+}
+html[data-theme=dark] .auth-experience--recovery {
+  .recovery-symbol { background: #2d452d; color: #b1d595; border-color: #46653b; }
+  :is(.recovery-note,.recovery-address,.recovery-loading) { background: #233a26; border-color: #3d5837; color: #b0c79e; }
+  :is(.recovery-steps li,.recovery-text,.recovery-checklist,.recovery-address small) { color: #a8be97; }
+  .recovery-steps li > span { background: #30492c; color: #b0d091; }
+  :is(.recovery-address strong,.recovery-error-link,.recovery-checklist.is-valid) { color: #b1d697; }
+  .auth-experience__foot a { color: #b1d697; }
+  .password-mismatch { color: #f0ad9b; }
+}
+@keyframes recovery-breathe { 0%,100% { opacity: .45; } 50% { opacity: 1; } }
+@media (max-width: 650px) {
+  .auth-experience--recovery .recovery-symbol { width: 51px; height: 51px; margin-bottom: 20px; border-radius: 14px; }
+  .auth-experience--recovery .auth-story .auth-garden, .auth-experience--recovery .auth-story__features { display: none; }
+  .auth-experience--recovery .auth-story { padding-block: 22px; }
+  .auth-experience--recovery .auth-story h2 { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { .auth-experience--recovery .recovery-symbol--loading svg, .auth-experience--recovery .recovery-loading > span { animation: none; } }

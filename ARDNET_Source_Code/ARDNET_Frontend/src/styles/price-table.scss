@@ -1,0 +1,72 @@
+.reference-prices.card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dfe7dc;
+  border-radius: 14px;
+  background: #fff;
+  color: #2c4233;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: normal;
+  box-shadow: 0 4px 18px -12px rgba(37, 68, 44, .12);
+
+  &:hover { box-shadow: 0 4px 18px -12px rgba(37, 68, 44, .12); }
+
+  .reference-prices__heading { display: flex; align-items: center; gap: 13px; padding: 25px 28px; }
+  .reference-prices__icon { display: grid; place-items: center; flex: 0 0 auto; width: 42px; height: 42px; border: 1px solid #e2eadc; border-radius: 11px; background: #f2f6ed; color: #4c7b50; }
+  .reference-prices__intro { min-width: 0; }
+  .reference-prices__intro h3 { margin: 0; color: #284433; font-family: inherit; font-size: 18px; font-weight: 600; letter-spacing: -.4px; line-height: 1.4; }
+  .reference-prices__intro p { margin: 5px 0 0; color: #657264; font-size: 13px; line-height: 1.6; }
+  .reference-prices__badge { margin-left: auto; flex: 0 0 auto; padding: 5px 10px; border: 1px solid #e4eadd; border-radius: 6px; background: #f5f8f0; color: #527048; font-size: 11px; font-weight: 500; }
+  .reference-prices__scroll { width: 100%; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #b7c8b3 #f4f7ef; }
+  .reference-prices__scroll:focus-visible { outline: 2px solid #28734c; outline-offset: -2px; }
+  .reference-prices__table { width: 100%; min-width: 700px; border-collapse: collapse; text-align: left; font-family: inherit; font-size: 14px; }
+  .reference-prices__table th, .reference-prices__table td { padding: 20px; border-bottom: 1px solid #edf0e9; vertical-align: middle; line-height: 1.55; }
+  .reference-prices__table th:first-child, .reference-prices__table td:first-child { padding-left: 28px; }
+  .reference-prices__table th:last-child, .reference-prices__table td:last-child { padding-right: 28px; }
+  .reference-prices__table thead th { padding-block: 12px; background: #f7f9f4; border-block: 1px solid #e7ede2; color: #647160; font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; white-space: nowrap; }
+  .reference-prices__table tbody th { font-weight: 500; }
+  .reference-prices__table tbody tr:last-child th, .reference-prices__table tbody tr:last-child td { border-bottom: 0; }
+  .reference-prices__table tbody tr:hover { background: #fbfcf9; }
+  .reference-prices__produce { display: block; min-width: 95px; max-width: 180px; overflow-wrap: anywhere; color: #2d4b36; font-size: 14px; font-weight: 600; }
+  .reference-prices__market { display: block; max-width: 230px; color: #41503e; font-size: 13px; }
+  .reference-prices__location { display: block; margin-top: 4px; color: #687564; font-size: 12px; }
+  .reference-prices__amount-column { text-align: right; white-space: nowrap; }
+  .reference-prices__amount { color: #2d623e; font-size: 17px; font-weight: 600; letter-spacing: -.4px; font-variant-numeric: tabular-nums; }
+  .reference-prices__unit { margin-left: 5px; color: #687564; font-size: 12px; font-weight: 400; }
+  .reference-prices__date { color: #5b6956; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .reference-prices__source { display: block; min-width: 90px; max-width: 210px; overflow-wrap: anywhere; color: #5b6956; font-size: 13px; }
+  .reference-prices__footer { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 28px; border-top: 1px solid #e8ede3; background: #fcfdfb; color: #65715f; font-size: 12px; }
+  .reference-prices__footer p { margin: 0; line-height: 1.7; }
+  .reference-prices__footer > span { flex: 0 0 auto; font-size: 11px; }
+  .reference-prices__state { margin: 0; padding: 36px 28px; border-top: 1px solid #e8ede3; color: #65715f; font-size: 14px; }
+  .reference-prices__state--error { color: #855348; }
+}
+
+@media (max-width: 600px) {
+  .reference-prices.card {
+    .reference-prices__heading { display: grid; grid-template-columns: 42px minmax(0, 1fr); padding: 22px 20px; gap: 11px; }
+    .reference-prices__icon { align-self: start; }
+    .reference-prices__intro { flex: 1; }
+    .reference-prices__intro h3 { font-size: 17px; }
+    .reference-prices__intro p { font-size: 12px; }
+    .reference-prices__badge { grid-column: 2; justify-self: start; margin-left: 0; }
+    .reference-prices__scroll { overflow: visible; }
+    .reference-prices__table { display: block; min-width: 0; }
+    .reference-prices__table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .reference-prices__table tbody { display: block; }
+    .reference-prices__table tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 16px; padding: 22px 20px; border-top: 1px solid #e8ede3; }
+    .reference-prices__table tbody th, .reference-prices__table tbody td { min-width: 0; padding: 0; border: 0; }
+    .reference-prices__table tbody th:first-child { grid-column: 1; grid-row: 1; padding: 0; align-self: center; }
+    .reference-prices__table tbody td:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+    .reference-prices__table tbody td:nth-child(3) { grid-column: 2; grid-row: 1; }
+    .reference-prices__table tbody td:nth-child(4) { grid-column: 1; grid-row: 3; white-space: normal; }
+    .reference-prices__table tbody td:last-child { grid-column: 2; grid-row: 3; max-width: 135px; padding: 0; text-align: right; }
+    .reference-prices__table td[data-label]::before { content: attr(data-label); display: block; margin-bottom: 3px; color: #657264; font-size: 11px; font-weight: 500; }
+    .reference-prices__produce { min-width: 0; font-size: 15px; }
+    .reference-prices__amount { font-size: 17px; }
+    .reference-prices__footer { align-items: start; flex-direction: column; gap: 5px; padding: 16px 20px; }
+    .reference-prices__state { padding: 28px 20px; }
+  }
+}

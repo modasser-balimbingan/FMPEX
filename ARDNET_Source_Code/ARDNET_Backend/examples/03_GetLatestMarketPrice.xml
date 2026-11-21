@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:m="urn:ardnet:market-price:v1">
+  <soap:Body>
+    <m:GetLatestMarketPrice>
+      <m:regionCode>IX</m:regionCode>
+      <m:produceName>Rice</m:produceName>
+      <m:marketName>ARDNET Test Market C</m:marketName>
+      <m:location>Dipolog City</m:location>
+      <m:unit>kg</m:unit>
+    </m:GetLatestMarketPrice>
+  </soap:Body>
+</soap:Envelope>

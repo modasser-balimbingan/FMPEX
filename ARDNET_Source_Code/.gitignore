@@ -1,0 +1,57 @@
+# Sensitive local environment settings
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local dependencies and caches
+node_modules/
+.pnp.*
+.vite/
+.cache/
+.next/
+__pycache__/
+.venv/
+
+# Builds, output and coverage
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Temporary and generated files
+*.log
+*.tmp
+*.bak
+*.backup
+*.dump
+*.sqlite
+*.sqlite3
+*.db
+uploads/
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archive copies
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Credentials and private keys
+*.pem
+*.p12
+*.pfx
+*.key
+credentials.json
+secrets.json
+service-account*.json
+.npmrc
+
+# Intentionally DO NOT ignore package.json or package-lock.json.
+# Both are required for teammates to reproduce the app's dependencies.

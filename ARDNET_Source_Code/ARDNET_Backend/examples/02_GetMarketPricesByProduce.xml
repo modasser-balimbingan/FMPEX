@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:m="urn:ardnet:market-price:v1">
+  <soap:Body>
+    <m:GetMarketPricesByProduce>
+      <m:regionCode>IX</m:regionCode>
+      <m:produceName>Rice</m:produceName>
+      <m:unit>kg</m:unit>
+    </m:GetMarketPricesByProduce>
+  </soap:Body>
+</soap:Envelope>
